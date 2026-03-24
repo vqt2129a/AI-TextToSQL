@@ -204,14 +204,5 @@ Response (Chat):
 
 ---
 
-## Tác giả
-Xây dựng & chia sẻ các dự án Backend – AI – Database  
-📌 Phù hợp cho học tập, demo và giảng dạy
-
----
-
-> "Không cần biết SQL giỏi đến đâu, chỉ cần biết hỏi đúng câu hỏi."
-
----
 
 
