@@ -1,10 +1,13 @@
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 import google.generativeai as genai
 
 import config
-from config import GEMINI_API_KEY, logger
+from config import GEMINI_API_KEY, PORT, logger
 from routes import router
 
 @asynccontextmanager
@@ -71,8 +74,24 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# API routes (must be before static files mount)
 app.include_router(router)
+
+# Serve React frontend static files (for production deployment)
+STATIC_DIR = os.path.join(os.path.dirname(__file__), "..", "static")
+if os.path.exists(STATIC_DIR):
+    logger.info(f"📁 Serving frontend from: {STATIC_DIR}")
+
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        """Serve React SPA - fallback to index.html for client-side routing"""
+        file_path = os.path.join(STATIC_DIR, full_path)
+        if os.path.isfile(file_path):
+            return FileResponse(file_path)
+        return FileResponse(os.path.join(STATIC_DIR, "index.html"))
+
+    app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=PORT, reload=True)
