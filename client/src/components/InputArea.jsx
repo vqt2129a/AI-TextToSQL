@@ -59,7 +59,7 @@ export default function InputArea({ onSend, isProcessing }) {
           )}
         </button>
       </div>
-      <p className="hidden md:block text-center text-xs text-gray-600 mt-1.5">
+      <p className="hidden lg:block text-center text-xs text-gray-600 mt-1.5">
         <kbd className="px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 text-[10px]">Ctrl</kbd>
         {' + '}
         <kbd className="px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 text-[10px]">Enter</kbd>

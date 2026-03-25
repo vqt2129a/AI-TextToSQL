@@ -66,10 +66,10 @@ export default function SidePanel({ history, clearHistory, isOpen, onClose }) {
 
   return (
     <>
-      {/* Overlay backdrop on mobile */}
+      {/* Overlay backdrop on mobile/tablet */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
           onClick={onClose}
         />
       )}
@@ -77,13 +77,13 @@ export default function SidePanel({ history, clearHistory, isOpen, onClose }) {
       {/* Side panel */}
       <aside className={`
         fixed top-0 right-0 h-full w-72 z-40
-        md:relative md:z-auto md:block
+        lg:relative lg:z-auto
         glass border-l border-gray-800/50 flex flex-col overflow-hidden
         transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}
+        ${isOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
       `}>
-        {/* Close button on mobile */}
-        <div className="flex items-center justify-between px-3 py-2 md:hidden border-b border-gray-800/50">
+        {/* Close button on mobile/tablet */}
+        <div className="flex items-center justify-between px-3 py-2 lg:hidden border-b border-gray-800/50">
           <span className="text-sm text-gray-300 font-medium">Panel</span>
           <button onClick={onClose} className="text-gray-400 hover:text-white p-1 cursor-pointer">
             <FaXmark />

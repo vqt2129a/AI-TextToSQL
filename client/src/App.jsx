@@ -22,9 +22,9 @@ export default function App() {
     <div className="h-screen flex flex-col bg-gray-950 relative overflow-hidden">
       {/* Animated BG orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="bg-orb w-48 h-48 md:w-96 md:h-96 bg-cyan-500 -top-24 -left-24 md:-top-48 md:-left-48" />
-        <div className="bg-orb w-40 h-40 md:w-80 md:h-80 bg-teal-500 top-1/2 -right-20 md:-right-40" style={{ animationDelay: '2s' }} />
-        <div className="bg-orb w-32 h-32 md:w-64 md:h-64 bg-gray-500 -bottom-16 left-1/3 md:-bottom-32" style={{ animationDelay: '4s' }} />
+        <div className="bg-orb w-48 h-48 lg:w-96 lg:h-96 bg-cyan-500 -top-24 -left-24 lg:-top-48 lg:-left-48" />
+        <div className="bg-orb w-40 h-40 lg:w-80 lg:h-80 bg-teal-500 top-1/2 -right-20 lg:-right-40" style={{ animationDelay: '2s' }} />
+        <div className="bg-orb w-32 h-32 lg:w-64 lg:h-64 bg-gray-500 -bottom-16 left-1/3 lg:-bottom-32" style={{ animationDelay: '4s' }} />
       </div>
 
       {/* Header */}
@@ -55,7 +55,7 @@ export default function App() {
           <InputArea onSend={send} isProcessing={isProcessing} />
         </main>
 
-        {/* Side panel - hidden on mobile, overlay when toggled */}
+        {/* Side panel - hidden below lg, overlay when toggled */}
         <SidePanel
           history={history}
           clearHistory={clearHistory}
