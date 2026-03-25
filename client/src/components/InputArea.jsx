@@ -30,15 +30,15 @@ export default function InputArea({ onSend, isProcessing }) {
   };
 
   return (
-    <div className="border-t border-gray-800/50 bg-gray-950/80 backdrop-blur-xl px-4 py-3">
-      <div className="max-w-4xl mx-auto flex items-end gap-3">
-        <div className="flex-1 glass rounded-xl px-4 py-2.5 flex items-end gap-2 focus-within:border-cyan-500/50 transition-colors">
+    <div className="border-t border-gray-800/50 bg-gray-950/80 backdrop-blur-xl px-3 md:px-4 py-2.5 md:py-3">
+      <div className="max-w-4xl mx-auto flex items-end gap-2 md:gap-3">
+        <div className="flex-1 glass rounded-xl px-3 md:px-4 py-2 md:py-2.5 flex items-end gap-2 focus-within:border-cyan-500/50 transition-colors">
           <textarea
             ref={textareaRef}
             value={text}
             onChange={handleInput}
             onKeyDown={handleKeyDown}
-            placeholder="Nhập câu hỏi bằng tiếng Việt... (Ctrl+Enter để gửi)"
+            placeholder="Nhập câu hỏi bằng tiếng Việt..."
             rows={1}
             disabled={isProcessing}
             className="flex-1 bg-transparent outline-none text-sm text-gray-200 placeholder-gray-500 resize-none max-h-[120px]"
@@ -47,7 +47,7 @@ export default function InputArea({ onSend, isProcessing }) {
         <button
           onClick={handleSend}
           disabled={isProcessing || !text.trim()}
-          className="w-10 h-10 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 text-white 
+          className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 text-white 
                      flex items-center justify-center transition-all duration-200 shrink-0 cursor-pointer
                      hover:scale-105 hover:shadow-lg hover:shadow-black/30
                      disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
@@ -59,7 +59,7 @@ export default function InputArea({ onSend, isProcessing }) {
           )}
         </button>
       </div>
-      <p className="text-center text-xs text-gray-600 mt-1.5">
+      <p className="hidden md:block text-center text-xs text-gray-600 mt-1.5">
         <kbd className="px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 text-[10px]">Ctrl</kbd>
         {' + '}
         <kbd className="px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 text-[10px]">Enter</kbd>

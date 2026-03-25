@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaClock, FaDatabase, FaTrash } from 'react-icons/fa6';
+import { FaClock, FaDatabase, FaTrash, FaXmark } from 'react-icons/fa6';
 import { getDbInfo } from '../utils/api';
 
 function HistoryTab({ history, clearHistory }) {
@@ -61,44 +61,69 @@ function DbInfoTab() {
   );
 }
 
-export default function SidePanel({ history, clearHistory }) {
+export default function SidePanel({ history, clearHistory, isOpen, onClose }) {
   const [tab, setTab] = useState('history');
 
   return (
-    <aside className="w-72 glass border-l border-gray-800/50 flex flex-col h-full overflow-hidden">
-      {/* Tabs */}
-      <div className="flex border-b border-gray-800/50">
-        <button
-          onClick={() => setTab('history')}
-          className={`flex-1 py-2.5 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
-            tab === 'history' ? 'text-cyan-400 border-b-2 border-cyan-400' : 'text-gray-500 hover:text-gray-300'
-          }`}
-        >
-          <FaClock /> Lịch sử
-          {history.length > 0 && (
-            <span className="bg-cyan-500/20 text-cyan-400 text-[10px] px-1.5 py-0.5 rounded-full">
-              {history.length}
-            </span>
-          )}
-        </button>
-        <button
-          onClick={() => setTab('db')}
-          className={`flex-1 py-2.5 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
-            tab === 'db' ? 'text-cyan-400 border-b-2 border-cyan-400' : 'text-gray-500 hover:text-gray-300'
-          }`}
-        >
-          <FaDatabase /> CSDL
-        </button>
-      </div>
+    <>
+      {/* Overlay backdrop on mobile */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          onClick={onClose}
+        />
+      )}
 
-      {/* Tab content */}
-      <div className="flex-1 overflow-hidden">
-        {tab === 'history' ? (
-          <HistoryTab history={history} clearHistory={clearHistory} />
-        ) : (
-          <DbInfoTab />
-        )}
-      </div>
-    </aside>
+      {/* Side panel */}
+      <aside className={`
+        fixed top-0 right-0 h-full w-72 z-40
+        md:relative md:z-auto md:block
+        glass border-l border-gray-800/50 flex flex-col overflow-hidden
+        transition-transform duration-300 ease-in-out
+        ${isOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}
+      `}>
+        {/* Close button on mobile */}
+        <div className="flex items-center justify-between px-3 py-2 md:hidden border-b border-gray-800/50">
+          <span className="text-sm text-gray-300 font-medium">Panel</span>
+          <button onClick={onClose} className="text-gray-400 hover:text-white p-1 cursor-pointer">
+            <FaXmark />
+          </button>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex border-b border-gray-800/50">
+          <button
+            onClick={() => setTab('history')}
+            className={`flex-1 py-2.5 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+              tab === 'history' ? 'text-cyan-400 border-b-2 border-cyan-400' : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <FaClock /> Lịch sử
+            {history.length > 0 && (
+              <span className="bg-cyan-500/20 text-cyan-400 text-[10px] px-1.5 py-0.5 rounded-full">
+                {history.length}
+              </span>
+            )}
+          </button>
+          <button
+            onClick={() => setTab('db')}
+            className={`flex-1 py-2.5 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+              tab === 'db' ? 'text-cyan-400 border-b-2 border-cyan-400' : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <FaDatabase /> CSDL
+          </button>
+        </div>
+
+        {/* Tab content */}
+        <div className="flex-1 overflow-hidden">
+          {tab === 'history' ? (
+            <HistoryTab history={history} clearHistory={clearHistory} />
+          ) : (
+            <DbInfoTab />
+          )}
+        </div>
+      </aside>
+    </>
   );
 }
