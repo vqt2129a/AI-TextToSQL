@@ -65,6 +65,9 @@ export default function InputArea({ onSend, isProcessing }) {
         <kbd className="px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 text-[10px]">Enter</kbd>
         {' để gửi'}
       </p>
+      <p className="text-center text-[11px] text-gray-600 mt-1">
+        AI có thể mắc lỗi. Hãy kiểm tra lại các thông tin quan trọng.
+      </p>
     </div>
   );
 }
