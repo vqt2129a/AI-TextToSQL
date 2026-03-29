@@ -32,7 +32,7 @@ function ResultTable({ data }) {
   return (
     <div className="mt-3 rounded-xl overflow-hidden border border-gray-700/50">
       <div className="px-3 py-2 bg-cyan-500/10 text-xs text-cyan-400 font-medium">
-        📋 Kết quả: {data.length} dòng
+         Kết quả: {data.length} dòng
       </div>
       <div className="overflow-x-auto max-h-64">
         <table className="w-full text-xs md:text-sm">

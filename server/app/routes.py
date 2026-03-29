@@ -89,7 +89,6 @@ async def query_sql(req: QueryRequest):
         return {"success": False, "error": str(e)}
 
 @router.get("/api/status")
-@router.get("/api/health")  # backward compat
 async def check_status():
     try:
         with engine.connect() as conn:
@@ -109,7 +108,6 @@ async def check_status():
     }
 
 @router.get("/api/db-info")
-@router.get("/api/schema")  # backward compat
 async def get_db_info():
     schema = get_table_schema()
     return {
